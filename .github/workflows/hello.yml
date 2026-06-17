@@ -1,20 +1,17 @@
+---
 name: Hello Workflow
-
 on:
-  push:
-
+  push: null
 jobs:
-  hello:
+  greet:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
       - name: Print Hello
         run: echo "Hello World"
-
+  details:
+    runs-on: ubuntu-latest
+    steps:
       - name: Show Docker and Python Version
-        run: |
-          docker --version
-          python --version
+        run: docker --version python --version
