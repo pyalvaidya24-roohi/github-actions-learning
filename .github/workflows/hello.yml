@@ -13,3 +13,8 @@ jobs:
 
       - name: Print Hello
         run: echo "Hello World"
+
+      - name: Show Docker and Python Version
+        run: |
+          docker --version
+          python --version
