@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
 
 jobs:
+* every job needs seprate runner , its called parallelism
   code:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +25,7 @@ jobs:
         run: echo "Testing the container"
 
   deploy:
-    needs: test
+    needs: [builds,test]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy the App
