@@ -1,6 +1,16 @@
 name: CICD
 on:
   workflow_dispatch:
+    inputs:
+      environments:
+        description: this is env where wrokflow runs
+        default: 'dev'
+        required: true
+        choice: type: 
+        options: 
+         - dev
+         - prod
+         - staging
 
 jobs:
 #every job needs seprate runner , its called parallelism
