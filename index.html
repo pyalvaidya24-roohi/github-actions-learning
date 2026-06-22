@@ -6,7 +6,6 @@
 <title>TechMart Store</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -50,14 +49,8 @@ nav{
     padding:80px 20px;
 }
 
-.hero h1{
-    font-size:50px;
-}
-
-.hero p{
-    margin-top:10px;
-    font-size:20px;
-}
+.hero h1{ font-size:50px; }
+.hero p{ margin-top:10px; font-size:20px; }
 
 .products{
     display:flex;
@@ -86,9 +79,7 @@ nav{
     object-fit:cover;
 }
 
-.content{
-    padding:15px;
-}
+.content{ padding:15px; }
 
 .price{
     color:#2563eb;
@@ -114,12 +105,8 @@ button:hover{
 
 .features{
     background:white;
-    padding:50px;
+    padding:30px;
     text-align:center;
-}
-
-.features h2{
-    margin-bottom:20px;
 }
 
 footer{
@@ -129,6 +116,11 @@ footer{
     padding:20px;
 }
 
+input{
+    padding:10px;
+    width:300px;
+    margin-top:10px;
+}
 </style>
 </head>
 
@@ -137,10 +129,7 @@ footer{
 <header>
 <nav>
 <div class="logo">🛒 TechMart</div>
-
-<div class="cart">
-Cart: <span id="cartCount">0</span>
-</div>
+<div class="cart">Cart: <span id="cartCount">0</span></div>
 </nav>
 </header>
 
@@ -163,7 +152,7 @@ Cart: <span id="cartCount">0</span>
 <div class="card">
 <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800">
 <div class="content">
-<h3>Premium Headphones</h3>
+<h3>Headphones</h3>
 <p class="price">₹4,999</p>
 <button onclick="addToCart('Headphones')">Add To Cart</button>
 </div>
@@ -190,33 +179,79 @@ Cart: <span id="cartCount">0</span>
 </section>
 
 <section class="features">
-<h2>🚀 DevOps Features</h2>
+<h2>🧾 Checkout (COD)</h2>
 
-<p>✅ Hosted on GitHub Pages</p>
-<p>✅ GitHub Actions CI/CD</p>
-<p>✅ Docker Ready</p>
-<p>✅ Automated Deployment</p>
+<p>Delivery Address:</p>
+<input type="text" id="location" placeholder="Enter your full address">
+
+<br><br>
+
+<button onclick="checkout()">Place Order (Cash on Delivery)</button>
+
+<div id="orderSummary" style="margin-top:20px;"></div>
 </section>
 
 <footer>
 <h3>Created by Payal Vaidya</h3>
-<p>CloudOps Engineer | GitHub Actions Demo Project</p>
+<p>CloudOps Engineer | Demo Project</p>
 </footer>
 
 <script>
+let cart = [];
+let cartCount = 0;
 
-let cart=0;
+const products = {
+  "iPhone 16 Pro": 89999,
+  "Headphones": 4999,
+  "Nike Shoes": 2999,
+  "Smart Watch": 6999
+};
 
 function addToCart(product){
+  cart.push(product);
+  cartCount++;
 
-cart++;
-
-document.getElementById("cartCount").innerText=cart;
-
-alert(product + " added to cart!");
-
+  document.getElementById("cartCount").innerText = cartCount;
+  alert(product + " added to cart!");
 }
 
+function checkout(){
+  if(cart.length === 0){
+    alert("Cart is empty!");
+    return;
+  }
+
+  let location = document.getElementById("location").value;
+
+  if(!location){
+    alert("Please enter delivery address!");
+    return;
+  }
+
+  let subtotal = 0;
+
+  cart.forEach(item => {
+    subtotal += products[item];
+  });
+
+  let gst = subtotal * 0.18;
+  let total = subtotal + gst;
+
+  document.getElementById("orderSummary").innerHTML = `
+    <h3>✅ Order Placed Successfully (COD)</h3>
+    <p><b>Items:</b> ${cart.join(", ")}</p>
+    <p><b>Subtotal:</b> ₹${subtotal.toFixed(2)}</p>
+    <p><b>GST (18%):</b> ₹${gst.toFixed(2)}</p>
+    <p><b>Total:</b> ₹${total.toFixed(2)}</p>
+    <p><b>Address:</b> ${location}</p>
+    <p style="color:green;"><b>Payment Mode: Cash on Delivery</b></p>
+  `;
+
+  // reset cart
+  cart = [];
+  cartCount = 0;
+  document.getElementById("cartCount").innerText = 0;
+}
 </script>
 
 </body>
