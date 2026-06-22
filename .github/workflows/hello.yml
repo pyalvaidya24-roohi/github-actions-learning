@@ -1,7 +1,14 @@
 ---
 name: Hello Workflow
+
 on:
-  workflow_dispatch:
+  push:
+    branches: [main]
+
+    paths:
+      - '**.html'
+      - '**.yml'
+
 jobs:
   greet:
     runs-on: ubuntu-latest
