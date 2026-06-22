@@ -28,6 +28,8 @@ jobs:
       # static page Artifacts
       - name: Upload Static Files
         uses: actions/upload-pages-artifact@v4
+        with:
+         path: './*'
 
       # make Page live
       - name: Deploy to Github Pages
