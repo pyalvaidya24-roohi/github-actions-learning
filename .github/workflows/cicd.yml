@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 jobs:
-* every job needs seprate runner , its called parallelism
+#every job needs seprate runner , its called parallelism
   code:
     runs-on: ubuntu-latest
     steps:
